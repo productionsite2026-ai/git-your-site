@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { NotificationCenter } from "@/components/notifications/NotificationCenter";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Menu, X, Dog, Home, Calendar, Shield, CreditCard, BookOpen, Users, MessageSquare, LogOut, MapPin, PlusCircle, FileText, HelpCircle, ChevronDown } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -11,6 +10,8 @@ export const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userType, setUserType] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +44,6 @@ export const Header = () => {
         return;
       }
 
-      // Avoid additional Supabase calls inside the callback
       setTimeout(() => {
         supabase
           .from("profiles")
@@ -55,6 +55,20 @@ export const Header = () => {
     });
 
     return () => subscription.unsubscribe();
+  }, []);
+
+  // Gestion du clic extérieur pour replier le menu sur desktop
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleLogout = async () => {
@@ -78,17 +92,9 @@ export const Header = () => {
     { label: "Nos services", icon: Dog, isDropdown: true, subLinks: serviceLinks },
     { href: "/find-walkers?tab=deposer", label: "Déposer une demande", icon: PlusCircle },
     { href: "/tarifs", label: "Tarifs", icon: CreditCard },
-    { href: "/nos-zones", label: "Nos zones", icon: MapPin },
+    { href: "/nos-zones", label: "Nous sommes présents", icon: MapPin },
     { href: "/aide", label: "Aide", icon: HelpCircle },
   ];
-
-  const authLinks = isAuthenticated ? [
-    { href: userType === "walker" ? "/walker/dashboard" : "/dashboard", label: "Tableau de bord", icon: Home },
-    { href: "/bookings", label: "Mes réservations", icon: Calendar },
-    { href: "/messages", label: "Messages", icon: MessageSquare },
-    { href: "/profile", label: "Mon profil", icon: Users },
-    { href: "/referral", label: "Parrainage", icon: Users },
-  ] : [];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
@@ -106,19 +112,44 @@ export const Header = () => {
         <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             link.isDropdown ? (
-              <DropdownMenu key={link.label}>
-                <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              <div key={link.label} className="relative" ref={dropdownRef}>
+                <button 
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className={`flex items-center gap-1 text-sm font-medium transition-colors outline-none py-2 ${
+                    isServicesOpen ? 'text-primary' : 'text-muted-foreground hover:text-primary'
+                  }`}
+                >
                   {link.label}
-                  <ChevronDown className="h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {link.subLinks?.map((subLink) => (
-                    <DropdownMenuItem key={subLink.href} onClick={() => navigate(subLink.href)}>
-                      {subLink.label}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {/* Menu déroulant avec animation de dépliage */}
+                <div 
+                  className={`absolute top-full left-0 mt-1 w-64 bg-card border border-border rounded-xl shadow-xl p-2 z-50 overflow-hidden transition-all duration-300 ease-in-out origin-top ${
+                    isServicesOpen 
+                      ? 'opacity-100 scale-y-100 translate-y-0' 
+                      : 'opacity-0 scale-y-0 -translate-y-4 pointer-events-none'
+                  }`}
+                >
+                  <div className="grid grid-cols-1 gap-1">
+                    {link.subLinks?.map((subLink) => (
+                      <button
+                        key={subLink.href}
+                        onClick={() => {
+                          navigate(subLink.href);
+                          setIsServicesOpen(false);
+                        }}
+                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:bg-primary/10 hover:text-primary transition-all duration-200 text-left group"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-muted group-hover:bg-primary/20 flex items-center justify-center transition-colors">
+                          {subLink.icon && <subLink.icon className="h-4 w-4 group-hover:text-primary" />}
+                        </div>
+                        <span className="font-medium">{subLink.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ) : (
               <Link 
                 key={link.href}
@@ -151,7 +182,10 @@ export const Header = () => {
           </div>
 
           {/* Mobile Menu */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <Sheet open={isOpen} onOpenChange={(open) => {
+            setIsOpen(open);
+            if (!open) setIsServicesOpen(false); // Réinitialiser l'état des services à la fermeture du menu mobile
+          }}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="lg:hidden">
                 <Menu className="h-5 w-5" />
@@ -164,26 +198,43 @@ export const Header = () => {
                   <span className="text-xl font-bold text-primary">DogWalking</span>
                 </div>
 
-                <nav className="flex-1 py-6 space-y-1">
+                <nav className="flex-1 py-6 space-y-1 overflow-y-auto">
                   <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Navigation</p>
                   {navLinks.map((link, index) => (
                     link.isDropdown ? (
-                      <div key={`dropdown-${index}`}>
-                        <Link
-                          to={link.subLinks?.[0]?.href || "#"}
-                          onClick={() => setIsOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-accent transition-colors"
+                      <div key={`dropdown-${index}`} className="space-y-1">
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setIsServicesOpen(!isServicesOpen);
+                          }}
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                            isServicesOpen ? 'text-primary' : 'text-muted-foreground hover:bg-accent'
+                          }`}
                         >
-                          {link.icon && <link.icon className="h-4 w-4 text-muted-foreground" />}
-                          {link.label}
-                        </Link>
-                        <div className="ml-8 mt-1 space-y-1">
+                          <div className="flex items-center gap-3">
+                            {link.icon && <link.icon className="h-4 w-4" />}
+                            {link.label}
+                          </div>
+                          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {/* Dépliage mobile avec animation fluide */}
+                        <div 
+                          className={`ml-8 space-y-1 border-l border-border pl-4 overflow-hidden transition-all duration-300 ease-in-out ${
+                            isServicesOpen ? 'max-h-[400px] opacity-100 mt-2' : 'max-h-0 opacity-0'
+                          }`}
+                        >
                           {link.subLinks?.map((subLink) => (
                             <Link
                               key={subLink.href}
                               to={subLink.href}
-                              onClick={() => setIsOpen(false)}
-                              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-accent transition-colors"
+                              onClick={() => {
+                                setIsOpen(false);
+                                setIsServicesOpen(false);
+                              }}
+                              className="flex items-center gap-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary transition-colors"
                             >
                               {subLink.label}
                             </Link>
@@ -203,32 +254,34 @@ export const Header = () => {
                     )
                   ))}
 
-                  {isAuthenticated ? (
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start gap-2" 
-                      onClick={handleLogout}
-                    >
-                      <LogOut className="h-4 w-4" />
-                      Déconnexion
-                    </Button>
-                  ) : (
-                    <>
+                  <div className="pt-6 mt-6 border-t space-y-3">
+                    {isAuthenticated ? (
                       <Button 
                         variant="outline" 
-                        className="w-full" 
-                        onClick={() => { navigate("/auth"); setIsOpen(false); }}
+                        className="w-full justify-start gap-2" 
+                        onClick={handleLogout}
                       >
-                        Connexion
+                        <LogOut className="h-4 w-4" />
+                        Déconnexion
                       </Button>
-                      <Button 
-                        className="w-full" 
-                        onClick={() => { navigate("/auth?type=owner"); setIsOpen(false); }}
-                      >
-                        S'inscrire gratuitement
-                      </Button>
-                    </>
-                  )}
+                    ) : (
+                      <>
+                        <Button 
+                          variant="outline" 
+                          className="w-full" 
+                          onClick={() => { navigate("/auth"); setIsOpen(false); }}
+                        >
+                          Connexion
+                        </Button>
+                        <Button 
+                          className="w-full" 
+                          onClick={() => { navigate("/auth?type=owner"); setIsOpen(false); }}
+                        >
+                          S'inscrire gratuitement
+                        </Button>
+                      </>
+                    )}
+                  </div>
                 </nav>
               </div>
             </SheetContent>
