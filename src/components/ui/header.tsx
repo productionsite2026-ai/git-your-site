@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Menu, Dog, Home, Calendar, Shield, CreditCard, BookOpen, Users, MapPin, PlusCircle, HelpCircle, ChevronDown, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, Link } from "react-router-dom";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 
 export const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
