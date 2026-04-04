@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Menu, Dog, Home, Calendar, Shield, CreditCard, BookOpen, Users, MapPin, PlusCircle, HelpCircle, ChevronDown, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, Link } from "react-router-dom";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
 
 export const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -185,25 +185,24 @@ export const Header = () => {
 
                   {navLinks.map((link, index) =>
                     link.isDropdown ? (
-                      <Collapsible
-                        key={`dropdown-${index}`}
-                        open={isServicesOpen}
-                        onOpenChange={setIsServicesOpen}
-                      >
-                        <CollapsibleTrigger asChild>
-                          <button
-                            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                              isServicesOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:bg-accent"
-                            }`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <link.icon className="h-4 w-4" />
-                              {link.label}
-                            </div>
-                            <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`} />
-                          </button>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent className="ml-8 space-y-1 border-l border-border pl-4 mt-1">
+                      <div key={`dropdown-${index}`} className="space-y-1">
+                        <button
+                          onClick={() => setIsServicesOpen(!isServicesOpen)}
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                            isServicesOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:bg-accent"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <link.icon className="h-4 w-4" />
+                            {link.label}
+                          </div>
+                          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`} />
+                        </button>
+                        <div
+                          className={`ml-8 space-y-1 border-l border-border pl-4 overflow-hidden transition-all duration-300 ease-in-out ${
+                            isServicesOpen ? "max-h-[400px] opacity-100 mt-1" : "max-h-0 opacity-0"
+                          }`}
+                        >
                           {link.subLinks?.map((subLink) => (
                             <Link
                               key={subLink.href}
@@ -214,8 +213,8 @@ export const Header = () => {
                               {subLink.label}
                             </Link>
                           ))}
-                        </CollapsibleContent>
-                      </Collapsible>
+                        </div>
+                      </div>
                     ) : (
                       <Link
                         key={`link-${index}`}
