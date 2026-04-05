@@ -28,12 +28,9 @@ const Messages = lazy(() => import("./pages/Messages"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const LocalZone = lazy(() => import("./pages/LocalZone"));
 const RessourcesLegales = lazy(() => import("./pages/RessourcesLegales"));
 const WalkerProfile = lazy(() => import("./pages/WalkerProfile"));
 const Support = lazy(() => import("./pages/Support"));
-const NosZones = lazy(() => import("./pages/NosZones"));
-const DepartmentZone = lazy(() => import("./pages/DepartmentZone"));
 const FindWalkers = lazy(() => import("./pages/FindWalkers"));
 const DashboardPreview = lazy(() => import("./pages/DashboardPreview"));
 const ServicePromenade = lazy(() => import("./pages/services/ServicePromenade"));
@@ -118,13 +115,6 @@ const App = () => (
               <Route path="/aide" element={<Navigate to="/support" replace />} />
               <Route path="/faq" element={<Navigate to="/support" replace />} />
               <Route path="/help" element={<Navigate to="/support" replace />} />
-              {/* Zones */}
-              <Route path="/nos-zones" element={<NosZones />} />
-              <Route path="/zones" element={<NosZones />} />
-              <Route path="/pres-de-vous" element={<NosZones />} />
-              <Route path="/zone/departement/:slug" element={<DepartmentZone />} />
-              <Route path="/zone/:slug" element={<LocalZone />} />
-              <Route path="/zone/:slug/:service" element={<LocalZone />} />
               {/* Legal Resources */}
               <Route path="/ressources-legales" element={<RessourcesLegales />} />
               <Route path="/mentions-legales" element={<Navigate to="/ressources-legales?tab=mentions" replace />} />

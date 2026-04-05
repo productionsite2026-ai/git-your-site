@@ -10,7 +10,7 @@ import { SecurityTrustSection } from "@/components/ui/security-trust-section";
 import { TrustSection } from "@/components/ui/trust-section";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { UserTypesSection } from "@/components/ui/user-types-section";
-import { LocalPresenceSection } from "@/components/ui/local-presence-section";
+
 import { HomeIntroSection } from "@/components/ui/home-intro-section";
 import { HomeFAQSection } from "@/components/ui/home-faq-section";
 import { Footer } from "@/components/ui/footer";
@@ -46,7 +46,7 @@ const Index = () => {
         <TrustSection />
         <TestimonialsSection />
         <UserTypesSection />
-        <LocalPresenceSection />
+        
         <HomeFAQSection />
         
         {/* Section Preuves de Confiance (E-E-A-T) */}

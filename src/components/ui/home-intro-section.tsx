@@ -79,10 +79,7 @@ export const HomeIntroSection = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             DogWalking connecte les propriétaires de chiens avec des <strong className="text-foreground">promeneurs vérifiés</strong> dans 
-            toute la France. De <a href="/zones/paris" className="text-primary hover:underline font-medium">Paris</a> à 
-            <a href="/zones/lyon" className="text-primary hover:underline font-medium ml-1">Lyon</a>, de 
-            <a href="/zones/marseille" className="text-primary hover:underline font-medium ml-1">Marseille</a> à 
-            <a href="/zones/bordeaux" className="text-primary hover:underline font-medium ml-1">Bordeaux</a> : 
+            toute la France. De Paris à Lyon, de Marseille à Bordeaux : 
             trouvez un professionnel de confiance près de chez vous.
           </p>
         </motion.div>
