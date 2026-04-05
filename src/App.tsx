@@ -115,13 +115,6 @@ const App = () => (
               <Route path="/aide" element={<Navigate to="/support" replace />} />
               <Route path="/faq" element={<Navigate to="/support" replace />} />
               <Route path="/help" element={<Navigate to="/support" replace />} />
-              {/* Zones */}
-              <Route path="/nos-zones" element={<NosZones />} />
-              <Route path="/zones" element={<NosZones />} />
-              <Route path="/pres-de-vous" element={<NosZones />} />
-              <Route path="/zone/departement/:slug" element={<DepartmentZone />} />
-              <Route path="/zone/:slug" element={<LocalZone />} />
-              <Route path="/zone/:slug/:service" element={<LocalZone />} />
               {/* Legal Resources */}
               <Route path="/ressources-legales" element={<RessourcesLegales />} />
               <Route path="/mentions-legales" element={<Navigate to="/ressources-legales?tab=mentions" replace />} />
