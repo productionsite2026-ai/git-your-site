@@ -81,7 +81,7 @@ export const Header = () => {
     { href: "/find-walkers?tab=deposer", label: "Déposer une demande", icon: PlusCircle },
     { href: "/tarifs", label: "Tarifs", icon: CreditCard },
     { href: "/nos-zones", label: "Nos zones", icon: MapPin },
-    { href: "/aide", label: "Aide", icon: HelpCircle },
+    { href: "/support", label: "Aide", icon: HelpCircle },
   ];
 
   return (

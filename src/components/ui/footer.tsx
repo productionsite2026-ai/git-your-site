@@ -89,9 +89,9 @@ export const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4">
             <p>© {new Date().getFullYear()} DogWalking. Tous droits réservés.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
-              <Link to="/cgu" className="hover:text-white transition-colors">CGU/CGV</Link>
-              <Link to="/confidentialite" className="hover:text-white transition-colors">Confidentialité</Link>
+              <Link to="/ressources-legales?tab=mentions" className="hover:text-white transition-colors">Mentions légales</Link>
+              <Link to="/ressources-legales?tab=cgu" className="hover:text-white transition-colors">CGU/CGV</Link>
+              <Link to="/ressources-legales?tab=confidentialite" className="hover:text-white transition-colors">Confidentialité</Link>
             </div>
           </div>
         </div>

@@ -111,20 +111,25 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/aide" element={<Aide />} />
-              <Route path="/faq" element={<Aide />} />
-              <Route path="/help" element={<Aide />} />
+              {/* Support Center (FAQ + About + Contact) */}
+              <Route path="/support" element={<Support />} />
+              <Route path="/qui-sommes-nous" element={<Navigate to="/support?tab=a-propos" replace />} />
+              <Route path="/contact" element={<Navigate to="/support?tab=contact" replace />} />
+              <Route path="/aide" element={<Navigate to="/support" replace />} />
+              <Route path="/faq" element={<Navigate to="/support" replace />} />
+              <Route path="/help" element={<Navigate to="/support" replace />} />
+              {/* Zones */}
               <Route path="/nos-zones" element={<NosZones />} />
               <Route path="/zones" element={<NosZones />} />
               <Route path="/pres-de-vous" element={<NosZones />} />
               <Route path="/zone/departement/:slug" element={<DepartmentZone />} />
               <Route path="/zone/:slug" element={<LocalZone />} />
               <Route path="/zone/:slug/:service" element={<LocalZone />} />
-              <Route path="/mentions-legales" element={<MentionsLegales />} />
-              <Route path="/cgu" element={<CGU />} />
-              <Route path="/confidentialite" element={<Confidentialite />} />
+              {/* Legal Resources */}
+              <Route path="/ressources-legales" element={<RessourcesLegales />} />
+              <Route path="/mentions-legales" element={<Navigate to="/ressources-legales?tab=mentions" replace />} />
+              <Route path="/cgu" element={<Navigate to="/ressources-legales?tab=cgu" replace />} />
+              <Route path="/confidentialite" element={<Navigate to="/ressources-legales?tab=confidentialite" replace />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
