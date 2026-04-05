@@ -46,7 +46,7 @@ const Index = () => {
         <TrustSection />
         <TestimonialsSection />
         <UserTypesSection />
-        <LocalPresenceSection />
+        
         <HomeFAQSection />
         
         {/* Section Preuves de Confiance (E-E-A-T) */}
