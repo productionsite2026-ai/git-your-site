@@ -187,7 +187,7 @@ export const Header = () => {
                     link.isDropdown ? (
                       <div key={`dropdown-${index}`} className="space-y-1">
                         <button
-                          onClick={() => setIsServicesOpen(!isServicesOpen)}
+                          onClick={(e) => { e.stopPropagation(); setIsServicesOpen(prev => !prev); }}
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                             isServicesOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:bg-accent"
                           }`}
