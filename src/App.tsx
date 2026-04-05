@@ -78,6 +78,7 @@ const App = () => (
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="/dashboard-preview" element={<DashboardPreview />} />
               <Route path="/services/:slug" element={<ServicePage />} />
               <Route path="/services/promenade" element={<ServicePromenade />} />
