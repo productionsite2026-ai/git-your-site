@@ -385,8 +385,8 @@ const Support = () => {
                     <CardContent>
                       {isSubmitted ? (
                         <div className="text-center py-12">
-                          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <CheckCircle className="h-8 w-8 text-green-600" />
+                          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <CheckCircle className="h-8 w-8 text-primary" />
                           </div>
                           <h3 className="text-xl font-semibold mb-2">Message envoyé !</h3>
                           <p className="text-muted-foreground mb-6">Réponse sous 24h maximum.</p>
