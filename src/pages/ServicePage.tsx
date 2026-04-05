@@ -653,7 +653,7 @@ const ServicePage = () => {
                 size="lg" 
                 variant="outline" 
                 className="rounded-full px-8" 
-                onClick={() => navigate('/zones')}
+                onClick={() => navigate('/find-walkers')}
               >
                 Voir toutes les zones couvertes
                 <ArrowRight className="ml-2 h-5 w-5" />
