@@ -57,11 +57,11 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider">Ressources</h3>
             <ul className="space-y-2 text-sm text-white/70">
-              <li><Link to="/qui-sommes-nous" className="hover:text-white transition-colors">Qui sommes-nous</Link></li>
-              <li><Link to="/aide" className="hover:text-white transition-colors">Centre d'aide</Link></li>
+              <li><Link to="/support?tab=a-propos" className="hover:text-white transition-colors">Qui sommes-nous</Link></li>
+              <li><Link to="/support" className="hover:text-white transition-colors">Centre d'aide</Link></li>
               <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/walker/register" className="hover:text-white transition-colors">Devenir promeneur</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/support?tab=contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
