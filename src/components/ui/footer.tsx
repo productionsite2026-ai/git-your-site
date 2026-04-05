@@ -57,11 +57,11 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider">Ressources</h3>
             <ul className="space-y-2 text-sm text-white/70">
-              <li><Link to="/qui-sommes-nous" className="hover:text-white transition-colors">Qui sommes-nous</Link></li>
-              <li><Link to="/aide" className="hover:text-white transition-colors">Centre d'aide</Link></li>
+              <li><Link to="/support?tab=a-propos" className="hover:text-white transition-colors">Qui sommes-nous</Link></li>
+              <li><Link to="/support" className="hover:text-white transition-colors">Centre d'aide</Link></li>
               <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/walker/register" className="hover:text-white transition-colors">Devenir promeneur</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/support?tab=contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -89,9 +89,9 @@ export const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/50 gap-4">
             <p>© {new Date().getFullYear()} DogWalking. Tous droits réservés.</p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
-              <Link to="/cgu" className="hover:text-white transition-colors">CGU/CGV</Link>
-              <Link to="/confidentialite" className="hover:text-white transition-colors">Confidentialité</Link>
+              <Link to="/ressources-legales?tab=mentions" className="hover:text-white transition-colors">Mentions légales</Link>
+              <Link to="/ressources-legales?tab=cgu" className="hover:text-white transition-colors">CGU/CGV</Link>
+              <Link to="/ressources-legales?tab=confidentialite" className="hover:text-white transition-colors">Confidentialité</Link>
             </div>
           </div>
         </div>

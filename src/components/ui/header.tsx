@@ -81,7 +81,7 @@ export const Header = () => {
     { href: "/find-walkers?tab=deposer", label: "Déposer une demande", icon: PlusCircle },
     { href: "/tarifs", label: "Tarifs", icon: CreditCard },
     { href: "/nos-zones", label: "Nos zones", icon: MapPin },
-    { href: "/aide", label: "Aide", icon: HelpCircle },
+    { href: "/support", label: "Aide", icon: HelpCircle },
   ];
 
   return (
@@ -187,7 +187,7 @@ export const Header = () => {
                     link.isDropdown ? (
                       <div key={`dropdown-${index}`} className="space-y-1">
                         <button
-                          onClick={(e) => { e.stopPropagation(); setIsServicesOpen(prev => !prev); }}
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsServicesOpen(prev => !prev); }}
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                             isServicesOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:bg-accent"
                           }`}
@@ -198,22 +198,20 @@ export const Header = () => {
                           </div>
                           <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`} />
                         </button>
-                        <div
-                          className={`ml-8 space-y-1 border-l border-border pl-4 overflow-hidden transition-all duration-300 ease-in-out ${
-                            isServicesOpen ? "max-h-[400px] opacity-100 mt-1" : "max-h-0 opacity-0"
-                          }`}
-                        >
-                          {link.subLinks?.map((subLink) => (
-                            <Link
-                              key={subLink.href}
-                              to={subLink.href}
-                              onClick={() => { setIsOpen(false); setIsServicesOpen(false); }}
-                              className="flex items-center gap-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary transition-colors"
-                            >
-                              {subLink.label}
-                            </Link>
-                          ))}
-                        </div>
+                        {isServicesOpen && (
+                          <div className="ml-8 space-y-1 border-l border-border pl-4 mt-1 animate-in fade-in slide-in-from-top-2 duration-200">
+                            {link.subLinks?.map((subLink) => (
+                              <Link
+                                key={subLink.href}
+                                to={subLink.href}
+                                onClick={() => { setIsOpen(false); setIsServicesOpen(false); }}
+                                className="flex items-center gap-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                {subLink.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <Link
