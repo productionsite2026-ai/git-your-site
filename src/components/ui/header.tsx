@@ -167,7 +167,7 @@ export const Header = () => {
           {/* ========== MOBILE HAMBURGER — visible sous md ========== */}
           <Sheet open={isOpen} onOpenChange={(open) => {
             setIsOpen(open);
-            if (!open) setIsServicesOpen(false);
+            if (!open) setIsMobileServicesOpen(false);
           }}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
