@@ -12,6 +12,7 @@ export const Header = () => {
   const [userType, setUserType] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -80,7 +81,7 @@ export const Header = () => {
     { label: "Nos services", icon: Dog, isDropdown: true, subLinks: serviceLinks },
     { href: "/find-walkers?tab=deposer", label: "Déposer une demande", icon: PlusCircle },
     { href: "/tarifs", label: "Tarifs", icon: CreditCard },
-    { href: "/nos-zones", label: "Nos zones", icon: MapPin },
+    { href: "/nos-zones", label: "Nous Sommes Présents", icon: MapPin },
     { href: "/support", label: "Aide", icon: HelpCircle },
   ];
 
@@ -166,7 +167,7 @@ export const Header = () => {
           {/* ========== MOBILE HAMBURGER — visible sous md ========== */}
           <Sheet open={isOpen} onOpenChange={(open) => {
             setIsOpen(open);
-            if (!open) setIsServicesOpen(false);
+            if (!open) setIsMobileServicesOpen(false);
           }}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
@@ -187,24 +188,24 @@ export const Header = () => {
                     link.isDropdown ? (
                       <div key={`dropdown-${index}`} className="space-y-1">
                         <button
-                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsServicesOpen(prev => !prev); }}
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsMobileServicesOpen(prev => !prev); }}
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                            isServicesOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:bg-accent"
+                            isMobileServicesOpen ? "text-primary bg-primary/5" : "text-muted-foreground hover:bg-accent"
                           }`}
                         >
                           <div className="flex items-center gap-3">
                             <link.icon className="h-4 w-4" />
                             {link.label}
                           </div>
-                          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`} />
+                          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180" : ""}`} />
                         </button>
-                        {isServicesOpen && (
+                        {isMobileServicesOpen && (
                           <div className="ml-8 space-y-1 border-l border-border pl-4 mt-1 animate-in fade-in slide-in-from-top-2 duration-200">
                             {link.subLinks?.map((subLink) => (
                               <Link
                                 key={subLink.href}
                                 to={subLink.href}
-                                onClick={() => { setIsOpen(false); setIsServicesOpen(false); }}
+                                onClick={() => { setIsOpen(false); setIsMobileServicesOpen(false); }}
                                 className="flex items-center gap-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary transition-colors"
                               >
                                 {subLink.label}
