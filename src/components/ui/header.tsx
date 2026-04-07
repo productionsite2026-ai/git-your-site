@@ -81,7 +81,7 @@ export const Header = () => {
     { label: "Nos services", icon: Dog, isDropdown: true, subLinks: serviceLinks },
     { href: "/find-walkers?tab=deposer", label: "Déposer une demande", icon: PlusCircle },
     { href: "/tarifs", label: "Tarifs", icon: CreditCard },
-    { href: "/find-walkers", label: "Nous Sommes Présents", icon: MapPin },
+    { href: "/nous-sommes-presents", label: "Nous Sommes Présents", icon: MapPin },
     { href: "/support", label: "Aide", icon: HelpCircle },
   ];
 
