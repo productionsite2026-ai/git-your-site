@@ -47,7 +47,7 @@ export const Footer = () => {
             <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider">Propriétaires</h3>
             <ul className="space-y-2 text-sm text-white/70">
               <li><Link to="/find-walkers" className="hover:text-white transition-colors">Trouver un promeneur</Link></li>
-              <li><Link to="/find-walkers" className="hover:text-white transition-colors">Zones d'intervention</Link></li>
+              <li><Link to="/nous-sommes-presents" className="hover:text-white transition-colors">Zones d'intervention</Link></li>
               <li><Link to="/dashboard" className="hover:text-white transition-colors">Mon espace</Link></li>
               <li><Link to="/dashboard?tab=parrainage" className="hover:text-white transition-colors">Parrainage</Link></li>
             </ul>
