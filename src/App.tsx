@@ -32,6 +32,7 @@ const RessourcesLegales = lazy(() => import("./pages/RessourcesLegales"));
 const WalkerProfile = lazy(() => import("./pages/WalkerProfile"));
 const Support = lazy(() => import("./pages/Support"));
 const FindWalkers = lazy(() => import("./pages/FindWalkers"));
+const NousSommesPresents = lazy(() => import("./pages/NousSommesPresents"));
 const DashboardPreview = lazy(() => import("./pages/DashboardPreview"));
 const ServicePromenade = lazy(() => import("./pages/services/ServicePromenade"));
 const ServiceGarde = lazy(() => import("./pages/services/ServiceGarde"));
@@ -99,6 +100,7 @@ const App = () => (
               {/* Standalone pages */}
               <Route path="/walkers" element={<FindWalkers />} />
               <Route path="/find-walkers" element={<FindWalkers />} />
+              <Route path="/nous-sommes-presents" element={<NousSommesPresents />} />
               <Route path="/walker/:walkerId" element={<WalkerProfile />} />
               <Route path="/bookings/:id" element={<BookingDetails />} />
               <Route path="/book/:walkerId" element={<BookWalk />} />
