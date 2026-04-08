@@ -317,7 +317,7 @@ const Tarifs = () => {
             icon={Users}
           />
           <div className="mt-8">
-            <SEOFAQ items={faqItems} />
+            <SEOFAQ faqs={faqItems} />
           </div>
         </div>
       </main>

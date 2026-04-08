@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import avatarWalker from "@/assets/avatar-walker.jpg";
 import { mockProfile } from "@/data/demoData";
 import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
 
 const ProfileTab = ({ role }: { role: "owner" | "walker" }) => {
   const { user } = useAuth();
