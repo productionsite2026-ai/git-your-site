@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { SEOHead } from "@/components/seo/SEOHead";
@@ -22,14 +22,14 @@ const Contact = () => {
     message: ""
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -79,7 +79,7 @@ const Contact = () => {
     },
     {
       question: "Le paiement est-il sécurisé ?",
-      aanswer: "Oui, nous utilisons un système de paiement sécurisé. Votre paiement est bloqué et libéré au promeneur uniquement après validation de la promenade avec preuves photo.""
+      answer: "Oui, nous utilisons un système de paiement sécurisé. Votre paiement est bloqué et libéré au promeneur uniquement après validation de la promenade avec preuves photo."
     }
   ];
 

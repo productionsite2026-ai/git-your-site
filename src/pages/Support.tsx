@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, type ChangeEvent, type FormEvent } from "react";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { SEOHead } from "@/components/seo/SEOHead";
@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
 import { toast } from "sonner";
 import teamImage from "@/assets/pages/equipe-dogwalking.jpg";
 import missionImage from "@/assets/trust/promeneur-verifie-badge.jpg";
@@ -46,7 +45,8 @@ const faqCategories = {
       { question: "Comment devenir promeneur ?", answer: "Inscrivez-vous, complétez votre profil, soumettez vos documents (CNI, casier, assurance RC). Vérification sous 48h." },
       { question: "Quels documents sont nécessaires ?", answer: "CNI ou passeport, casier judiciaire (bulletin n°3), attestation d'assurance RC et photo professionnelle." },
       { question: "Comment fixer mes tarifs ?", answer: "Vous êtes libre au-dessus des minimums (8€ promenade, 10€ garde). Adaptez selon votre expérience et zone." },
-      { question: "Comment suis-je payé ?", answer: "Le paiement est libéré après envoi des preuves et validation.Vous recevez l'intégralité du montant de la prestation. L'assurance et le support sont inclus.   { question: "Combien puis-je gagner ?", answer: "En moyenne 500-1500€/mois. Les promeneurs à temps plein dans les grandes villes dépassent 2000€/mois." },
+      { question: "Comment suis-je payé ?", answer: "Le paiement est libéré après envoi des preuves et validation. Vous recevez l'intégralité du montant de la prestation. L'assurance et le support sont inclus." },
+      { question: "Combien puis-je gagner ?", answer: "En moyenne 500-1500€/mois. Les promeneurs à temps plein dans les grandes villes dépassent 2000€/mois." },
     ],
   },
   paiement: {
@@ -91,11 +91,11 @@ const Support = () => {
     }
   }, [searchParams]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     await new Promise((r) => setTimeout(r, 1500));
