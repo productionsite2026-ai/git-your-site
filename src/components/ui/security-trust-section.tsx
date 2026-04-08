@@ -3,24 +3,9 @@ import { Shield, UserCheck, FileCheck, Star, Camera, Lock, Award } from "lucide-
 export const SecurityTrustSection = () => {
   const trustItems = [
     {
-      icon: UserCheck,
-      title: "Profils vérifiés",
-      description: "CNI, casier judiciaire et attestation d'assurance vérifiés pour chaque promeneur"
-    },
-    {
       icon: Award,
       title: "Formation Promeneurs certifiés",
       description: "Formation aux premiers secours canins, expérience vérifiée et références contrôlées"
-    },
-    {
-      icon: Camera,
-      title: "Preuves obligatoires",
-      description: "Photo ou vidéo envoyée pendant chaque prestation pour votre tranquillité"
-    },
-    {
-      icon: Lock,
-      title: "Paiement bloqué jusqu'à confirmation de service",
-      description: "Votre argent est sécurisé et débloqué uniquement après validation de la mission"
     },
     {
       icon: Star,
