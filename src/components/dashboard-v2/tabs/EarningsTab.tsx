@@ -1,4 +1,4 @@
-import { Euro, TrendingUp, Calendar, ArrowUpRight, ArrowDownRight, Download, Wallet, Receipt, ChevronRight } from "lucide-react";
+import { Euro, TrendingUp, Calendar, ArrowUpRight, ArrowDownRight, Download, Wallet, Receipt, ChevronRight, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEarnings } from "@/hooks/useEarnings";
@@ -52,7 +52,6 @@ const EarningsTab = () => {
 
   const totalPaid = displayTransactions.filter(t => t.status === "paid" && t.type === "credit").reduce((a, t) => a + t.amount, 0);
   const totalPending = displayTransactions.filter(t => t.status === "pending").reduce((a, t) => a + t.amount, 0);
-  const totalCommission = displayTransactions.reduce((a, t) => a + (t.commission || 0), 0);
 
   const stats = [
     { label: "Aujourd'hui", value: earnings.today, emoji: "💰" },
@@ -106,15 +105,15 @@ const EarningsTab = () => {
         ))}
       </div>
 
-      {/* Commission info */}
+      {/* Security info */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-        className="bg-amber-500/8 border border-amber-500/15 rounded-2xl p-3 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center shrink-0">
-          <Receipt className="w-4 h-4 text-amber-600" />
+        className="bg-primary/5 border border-primary/10 rounded-2xl p-3 flex items-center gap-3">
+        <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+          <ShieldCheck className="w-4 h-4 text-primary" />
         </div>
         <div className="flex-1">
-          <p className="text-xs font-bold text-foreground">Commission plateforme: 13%</p>
-          <p className="text-[10px] text-muted-foreground">Total retenu ce mois: {totalCommission.toFixed(0)}€</p>
+          <p className="text-xs font-bold text-foreground">Paiements sécurisés</p>
+          <p className="text-[10px] text-muted-foreground">Vos revenus sont garantis et libérés après chaque mission réussie.</p>
         </div>
       </motion.div>
 
@@ -157,11 +156,6 @@ const EarningsTab = () => {
                 <p className="text-sm font-bold text-foreground">🐕 {t.dogName}</p>
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] text-muted-foreground">{t.date}</p>
-                  {t.commission > 0 && (
-                    <span className="text-[8px] text-amber-600 bg-amber-500/10 px-1.5 py-0.5 rounded-full font-bold">
-                      -{t.commission.toFixed(0)}€ com.
-                    </span>
-                  )}
                 </div>
               </div>
             </div>

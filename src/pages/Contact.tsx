@@ -79,7 +79,7 @@ const Contact = () => {
     },
     {
       question: "Le paiement est-il sécurisé ?",
-      answer: "Oui, nous utilisons un système de paiement escrow. Votre paiement est sécurisé et libéré au promeneur uniquement après validation de la promenade avec preuves photo."
+      aanswer: "Oui, nous utilisons un système de paiement sécurisé. Votre paiement est bloqué et libéré au promeneur uniquement après validation de la promenade avec preuves photo.""
     }
   ];
 

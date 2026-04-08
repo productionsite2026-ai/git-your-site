@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, Camera, ArrowRight, Dog, Home, Moon, Sun, Heart, Stethoscope, Car, PawPrint, Shield, Check } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 
-// Import des images locales - utiliser les mêmes que servicesData
+// Import des images locales
 import promenadeParc from '@/assets/services/promenade-chien-parc.jpg';
 import visiteRepas from '@/assets/services/visite-chien-repas.jpg';
 import hebergementNuit from '@/assets/services/hebergement-nuit-chambre.jpg';
@@ -206,7 +206,7 @@ export const ServicesSection = () => {
           <div className="inline-flex items-center gap-3 bg-card rounded-2xl px-6 py-4 shadow-soft border border-border mb-8">
             <Shield className="h-6 w-6 text-primary" />
             <span className="text-sm md:text-base">
-              <strong>Garantie DogWalking :</strong> Preuves photo obligatoires + Paiement escrow + Commission 13%
+              <strong>Garantie DogWalking :</strong> Preuves photo obligatoires + Paiement sécurisé
             </span>
           </div>
           <div>

@@ -137,9 +137,6 @@ const ProfileTab = ({ role }: { role: "owner" | "walker" }) => {
     navigate("/");
   };
 
-  const commission = 0.13;
-  const netRate = hourlyRate * (1 - commission);
-
   const serviceEstimates = [
     { label: "Promenade (1h)", price: hourlyRate },
     { label: "Visite à domicile", price: Math.round(hourlyRate * 0.8) },
@@ -246,7 +243,7 @@ const ProfileTab = ({ role }: { role: "owner" | "walker" }) => {
               <div>
                 <p className="text-sm font-bold text-foreground">Mes Tarifs</p>
                 <p className="text-[10px] text-muted-foreground">
-                  {hourlyRate}€/h · Net {netRate.toFixed(0)}€/h · Rayon {serviceRadius}km
+                  {hourlyRate}€/h · Rayon {serviceRadius}km
                 </p>
               </div>
             </div>
@@ -266,8 +263,8 @@ const ProfileTab = ({ role }: { role: "owner" | "walker" }) => {
                   <span className="text-lg font-black text-foreground w-14 text-right">{hourlyRate}€</span>
                 </div>
                 <div className="flex items-center justify-between bg-primary/5 rounded-xl px-3 py-2">
-                  <span className="text-[10px] text-muted-foreground">Vous recevez (après 13%)</span>
-                  <span className="text-sm font-black text-primary">{netRate.toFixed(2)}€/h</span>
+                  <span className="text-[10px] text-muted-foreground">Votre revenu net</span>
+                  <span className="text-sm font-black text-primary">{hourlyRate}€/h</span>
                 </div>
               </div>
 
@@ -327,271 +324,70 @@ const ProfileTab = ({ role }: { role: "owner" | "walker" }) => {
               </div>
               <div>
                 <p className="text-sm font-bold text-foreground">Mes Documents</p>
-                <p className="text-[10px] text-muted-foreground">CNI, Casier B2, Assurance RC Pro</p>
+                <p className="text-[10px] text-muted-foreground">CNI, Casier B2, Attestation RC</p>
               </div>
             </div>
             <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${activeSection === "documents" ? "rotate-90" : ""}`} />
           </button>
           {activeSection === "documents" && (
-            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-              className="px-4 pb-4 space-y-2 border-t border-border/50 pt-3">
+            <div className="px-4 pb-4 space-y-3 border-t border-border/50 pt-3">
               {[
-                { label: "Carte d'identité", status: walkerProfile?.verified ? "verified" : "pending", icon: "🪪", type: "cni" },
-                { label: "Casier judiciaire B2", status: "pending", icon: "📋", type: "casier_b2" },
-                { label: "Assurance RC Pro", status: "pending", icon: "🛡️", type: "assurance_rc" },
+                { label: "Pièce d'identité", status: "valid", date: "Vérifié le 12/01" },
+                { label: "Extrait de casier judiciaire (B2)", status: "valid", date: "Vérifié le 12/01" },
+                { label: "Attestation Assurance RC", status: "pending", date: "En cours de validation" },
               ].map(doc => (
-                <div key={doc.label} className="flex items-center justify-between bg-muted/50 rounded-xl px-3 py-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{doc.icon}</span>
-                    <span className="text-xs font-semibold text-foreground">{doc.label}</span>
+                <div key={doc.label} className="flex items-center justify-between bg-muted/50 rounded-xl p-3">
+                  <div>
+                    <p className="text-xs font-bold text-foreground">{doc.label}</p>
+                    <p className="text-[9px] text-muted-foreground">{doc.date}</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${
-                      doc.status === "verified" ? "bg-primary/10 text-primary" : "bg-amber-500/10 text-amber-600"
-                    }`}>
-                      {doc.status === "verified" ? "✓ Vérifié" : "⏳ À envoyer"}
-                    </span>
-                    <label className="text-[10px] font-bold text-primary cursor-pointer">
-                      <Upload className="w-3.5 h-3.5" />
-                      <input type="file" accept="image/*,application/pdf" className="hidden"
-                        onChange={async (e) => {
-                          const file = e.target.files?.[0];
-                          if (!file || !user) return;
-                          if (file.size > 10 * 1024 * 1024) { toast.error("Max 10MB"); return; }
-                          try {
-                            const ext = file.name.split('.').pop();
-                            const path = `${user.id}/${doc.type}_${Date.now()}.${ext}`;
-                            const { error: uploadErr } = await supabase.storage.from('walker-documents').upload(path, file, { upsert: true });
-                            if (uploadErr) throw uploadErr;
-                            const { data: urlData } = supabase.storage.from('walker-documents').getPublicUrl(path);
-                            await supabase.from('walker_documents').upsert({
-                              walker_id: user.id,
-                              document_type: doc.type,
-                              file_url: urlData.publicUrl,
-                              verification_status: 'pending',
-                              submitted_at: new Date().toISOString(),
-                            }, { onConflict: 'walker_id,document_type' as any });
-                            toast.success(`${doc.label} envoyé ! Vérification sous 24-48h.`);
-                          } catch (err: any) { toast.error(err.message || "Erreur d'envoi"); }
-                          e.target.value = '';
-                        }}
-                      />
-                    </label>
-                  </div>
+                  <Badge className={doc.status === "valid" ? "bg-green-500/10 text-green-600 border-0" : "bg-amber-500/10 text-amber-600 border-0"}>
+                    {doc.status === "valid" ? "Vérifié" : "En attente"}
+                  </Badge>
                 </div>
               ))}
-              <p className="text-[9px] text-muted-foreground text-center pt-1">
-                Les documents sont vérifiés sous 24-48h par notre équipe
-              </p>
-            </motion.div>
+              <Button variant="outline" className="w-full text-xs font-bold gap-2">
+                <Upload className="w-3 h-3" /> Ajouter un document
+              </Button>
+            </div>
           )}
         </motion.div>
       )}
 
-      {/* === OWNER ONLY: Payment Methods === */}
-      {role === "owner" && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="bg-card rounded-2xl shadow-card overflow-hidden">
-          <button onClick={() => setActiveSection(activeSection === "payment" ? null : "payment")}
-            className="w-full p-4 flex items-center justify-between text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center">
-                <CreditCard className="w-4 h-4 text-accent" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-foreground">Moyens de paiement</p>
-                <p className="text-[10px] text-muted-foreground">Gérer vos cartes et modes de paiement</p>
-              </div>
-            </div>
-            <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${activeSection === "payment" ? "rotate-90" : ""}`} />
-          </button>
-          {activeSection === "payment" && (
-            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-              className="px-4 pb-4 border-t border-border/50 pt-3">
-              <div className="bg-muted/50 rounded-xl p-4 text-center space-y-2">
-                <CreditCard className="w-8 h-8 text-muted-foreground/30 mx-auto" />
-                <p className="text-xs font-semibold text-muted-foreground">Paiement sécurisé par Stripe</p>
-                <p className="text-[10px] text-muted-foreground">La carte sera demandée lors de votre première réservation</p>
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-      )}
-
-      {/* Notifications */}
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-        className="bg-card rounded-2xl shadow-card overflow-hidden">
-        <button onClick={() => setActiveSection(activeSection === "notifs" ? null : "notifs")}
-          className="w-full p-4 flex items-center justify-between text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center">
-              <Bell className="w-4 h-4 text-accent" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-foreground">Notifications</p>
-              <p className="text-[10px] text-muted-foreground">Push, email, SMS</p>
-            </div>
-          </div>
-          <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${activeSection === "notifs" ? "rotate-90" : ""}`} />
-        </button>
-        {activeSection === "notifs" && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-            className="px-4 pb-4 space-y-2 border-t border-border/50 pt-3">
-            {[
-              { key: "push", label: "Notifications push", icon: Smartphone },
-              { key: "email", label: "Notifications email", icon: Mail },
-              { key: "bookings", label: "Rappels réservation", icon: Bell },
-              { key: "messages", label: "Nouveaux messages", icon: Mail },
-              { key: "reviews", label: "Avis reçus", icon: Bell },
-              { key: "promos", label: "Offres & promotions", icon: Bell },
-            ].map(n => (
-              <div key={n.key} className="flex items-center justify-between py-1.5">
-                <div className="flex items-center gap-2">
-                  <n.icon className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-xs text-foreground">{n.label}</span>
-                </div>
-                <Switch checked={(notifs as any)[n.key]}
-                  onCheckedChange={(v) => setNotifs({ ...notifs, [n.key]: v })} />
-              </div>
-            ))}
-          </motion.div>
-        )}
-      </motion.div>
-
-      {/* Privacy & Security */}
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
-        className="bg-card rounded-2xl shadow-card overflow-hidden">
-        <button onClick={() => setActiveSection(activeSection === "privacy" ? null : "privacy")}
-          className="w-full p-4 flex items-center justify-between text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center">
-              <Shield className="w-4 h-4 text-foreground" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-foreground">Confidentialité & Sécurité</p>
-              <p className="text-[10px] text-muted-foreground">Visibilité, mot de passe</p>
-            </div>
-          </div>
-          <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${activeSection === "privacy" ? "rotate-90" : ""}`} />
-        </button>
-        {activeSection === "privacy" && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-            className="px-4 pb-4 space-y-3 border-t border-border/50 pt-3">
-            {[
-              { key: "profileVisible", label: role === "walker" ? "Apparaître dans les recherches" : "Profil visible par les promeneurs" },
-              { key: "showCity", label: "Afficher ma ville" },
-              { key: "showPhone", label: "Afficher mon téléphone (après réservation)" },
-            ].map(p => (
-              <div key={p.key} className="flex items-center justify-between py-1">
-                <span className="text-xs text-foreground">{p.label}</span>
-                <Switch checked={(privacy as any)[p.key]}
-                  onCheckedChange={(v) => setPrivacy({ ...privacy, [p.key]: v })} />
-              </div>
-            ))}
-            <div className="border-t border-border/50 pt-3 space-y-2">
-              <button onClick={async () => {
-                if (!user) return;
-                const { error } = await supabase.auth.resetPasswordForEmail(profile?.email || user.email || "", {
-                  redirectTo: window.location.origin + "/auth",
-                });
-                if (error) toast.error("Erreur : " + error.message);
-                else toast.success("Email de réinitialisation envoyé !");
-              }} className="w-full flex items-center gap-3 py-2 text-left">
-                <Lock className="w-4 h-4 text-muted-foreground" />
-                <span className="text-xs font-semibold text-foreground">Changer le mot de passe</span>
-              </button>
-              <button onClick={() => {
-                toast.success("Fonctionnalité bientôt disponible");
-              }} className="w-full flex items-center gap-3 py-2 text-left">
-                <Download className="w-4 h-4 text-muted-foreground" />
-                <span className="text-xs font-semibold text-foreground">Exporter mes données</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </motion.div>
-
-      {/* Quick Links */}
+      {/* Settings & Help */}
       <div className="space-y-2">
-        {role === "walker" && (
-          <>
-            <motion.button initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-              onClick={() => navigate("/walker/dashboard?tab=formation")}
-              className="w-full bg-card rounded-2xl shadow-card p-3.5 flex items-center gap-3 text-left hover:shadow-card-hover transition-shadow">
-              <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
-                <span className="text-sm">🎓</span>
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-bold text-foreground">Formation & Quiz</p>
-                <p className="text-[10px] text-muted-foreground">Améliorez vos compétences</p>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </motion.button>
-            <motion.button initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.22 }}
-              onClick={() => navigate("/walker/dashboard?tab=factures")}
-              className="w-full bg-card rounded-2xl shadow-card p-3.5 flex items-center gap-3 text-left hover:shadow-card-hover transition-shadow">
+        {[
+          { label: "Notifications", icon: Bell, path: "/walker/dashboard?tab=notifs" },
+          { label: "Sécurité & Mot de passe", icon: Lock, path: "/walker/dashboard?tab=security" },
+          { label: "Centre d'aide", icon: Shield, path: "/support" },
+          { label: "Nous contacter", icon: Mail, path: "/contact" },
+        ].map((item) => (
+          <button key={item.label} onClick={() => navigate(item.path)}
+            className="w-full bg-card rounded-2xl shadow-card p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center">
-                <FileText className="w-4 h-4 text-foreground" />
+                <item.icon className="w-4 h-4 text-muted-foreground" />
               </div>
-              <div className="flex-1">
-                <p className="text-sm font-bold text-foreground">Mes Factures</p>
-                <p className="text-[10px] text-muted-foreground">Historique des paiements</p>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </motion.button>
-          </>
-        )}
-        {role === "owner" && (
-          <>
-            <motion.button initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-              onClick={() => navigate("/dashboard?tab=parrainage")}
-              className="w-full bg-card rounded-2xl shadow-card p-3.5 flex items-center gap-3 text-left hover:shadow-card-hover transition-shadow">
-              <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center">
-                <span className="text-sm">🎁</span>
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-bold text-foreground">Parrainage</p>
-                <p className="text-[10px] text-muted-foreground">15€ pour vous, 10€ pour votre filleul</p>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </motion.button>
-            <motion.button initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.22 }}
-              onClick={() => navigate("/dashboard?tab=avis")}
-              className="w-full bg-card rounded-2xl shadow-card p-3.5 flex items-center gap-3 text-left hover:shadow-card-hover transition-shadow">
-              <div className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center">
-                <span className="text-sm">⭐</span>
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-bold text-foreground">Mes Avis</p>
-                <p className="text-[10px] text-muted-foreground">Consultez vos évaluations</p>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </motion.button>
-          </>
-        )}
+              <span className="text-sm font-bold text-foreground">{item.label}</span>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </button>
+        ))}
       </div>
 
-      {/* Help */}
-      <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
-        onClick={() => navigate("/aide")}
-        className="w-full bg-card rounded-2xl shadow-card p-3.5 flex items-center gap-3 text-left hover:shadow-card-hover transition-shadow">
-        <div className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center">
-          <span className="text-sm">❓</span>
-        </div>
-        <div className="flex-1">
-          <p className="text-sm font-bold text-foreground">Aide & Support</p>
-          <p className="text-[10px] text-muted-foreground">FAQ, contact, signaler un problème</p>
-        </div>
-        <ChevronRight className="w-4 h-4 text-muted-foreground" />
-      </motion.button>
-
       {/* Logout */}
-      <motion.button whileTap={{ scale: 0.97 }} onClick={handleLogout}
-        className="w-full py-3.5 rounded-2xl border border-destructive/20 text-destructive font-bold text-sm flex items-center justify-center gap-2 hover:bg-destructive/5 transition-colors">
-        <LogOut className="w-4 h-4" /> Se déconnecter
-      </motion.button>
+      <button onClick={handleLogout}
+        className="w-full py-4 rounded-2xl bg-destructive/5 text-destructive text-sm font-bold flex items-center justify-center gap-2 border border-destructive/10">
+        <LogOut className="w-4 h-4" /> Déconnexion
+      </button>
     </div>
   );
 };
+
+const Button = ({ children, variant, className, ...props }: any) => (
+  <button className={`px-4 py-2 rounded-xl transition-all ${variant === "outline" ? "border border-border hover:bg-muted" : "gradient-primary text-white"} ${className}`} {...props}>
+    {children}
+  </button>
+);
 
 export default ProfileTab;

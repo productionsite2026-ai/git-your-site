@@ -52,7 +52,7 @@ const WalkerRegister = () => {
     {
       icon: Shield,
       title: "Paiement sécurisé",
-      description: "Escrow + commission 13%. Paiements garantis sous 48h après validation."
+      description: "Paiement sécurisé. Paiements garantis sous 48h après validation de la mission."
     },
     {
       icon: Users,

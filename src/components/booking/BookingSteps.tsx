@@ -494,7 +494,7 @@ export const BookingSteps = ({
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
                   <Lock className="h-5 w-5 text-primary" />
                   <p className="text-sm text-muted-foreground">
-                    <strong className="text-foreground">Paiement escrow sécurisé</strong> - Les fonds sont libérés uniquement après confirmation du service
+                    <strong className="text-foreground">Paiement sécurisé</strong> - Les fonds sont bloqués jusqu'à confirmation du service
                   </p>
                 </div>
               </CardContent>

@@ -195,7 +195,7 @@ const BookWalk = () => {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       <SEOHead
         title="Réserver une Promenade | DogWalking"
-        description="Réservez une promenade ou un service pour votre chien avec un promeneur vérifié. Paiement sécurisé escrow."
+        description="Réservez une promenade ou un service pour votre chien avec un promeneur vérifié. Paiement sécurisé."
       />
       <Header />
       <main className="container mx-auto px-4 py-24 max-w-5xl">
@@ -281,7 +281,7 @@ const BookWalk = () => {
                         </li>
                         <li className="flex items-center gap-2">
                           <Lock className="h-4 w-4 text-primary" />
-                          Paiement escrow sécurisé
+                          Paiement sécurisé
                         </li>
                         <li className="flex items-center gap-2">
                           <Clock className="h-4 w-4 text-primary" />

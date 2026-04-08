@@ -53,7 +53,7 @@ const QuiSommesNous = () => {
     {
       icon: Shield,
       title: "Sécurité Absolue",
-      description: "La protection de votre animal et de vos données est notre priorité. Vérifications rigoureuses, paiement escrow, assurance premium incluse."
+      description: "La protection de votre animal et de vos données est notre priorité. Vérifications rigoureuses, paiement sécurisé, assurance premium incluse."
     },
     {
       icon: Heart,
@@ -189,7 +189,7 @@ const QuiSommesNous = () => {
                     "Vérification d'identité et casier judiciaire",
                     "Assurance responsabilité civile obligatoire",
                     "Preuves photo/vidéo à chaque mission",
-                    "Paiement escrow 100% sécurisé"
+                    "Paiement 100% sécurisé"
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />

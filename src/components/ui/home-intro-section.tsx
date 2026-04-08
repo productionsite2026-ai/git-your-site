@@ -36,8 +36,8 @@ export const HomeIntroSection = () => {
     },
     {
       icon: Lock,
-      title: "Paiement Escrow Sécurisé",
-      description: "Votre argent reste bloqué jusqu'à réception des preuves photo/vidéo de la prestation. Sans validation, vous êtes automatiquement remboursé.",
+      title: "Paiement Sécurisé",
+      description: "Votre argent reste bloqué en toute sécurité jusqu'à réception des preuves photo/vidéo de la prestation. Sans validation, vous êtes automatiquement remboursé.",
       highlight: "Innovation unique en France",
       image: validationPayment,
       color: "from-accent/20 to-accent/10"
@@ -191,10 +191,10 @@ export const HomeIntroSection = () => {
             <Button 
               size="lg" 
               variant="secondary"
-              onClick={() => navigate("/find-walkers")}
+              onClick={() => navigate("/find-walkers#annonces")}
               className="group"
             >
-              Trouver un promeneur
+              Voir les offres propriétaire libres
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>

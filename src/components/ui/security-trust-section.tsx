@@ -1,4 +1,4 @@
-import { Shield, UserCheck, FileCheck, Star, Camera, Lock } from "lucide-react";
+import { Shield, UserCheck, FileCheck, Star, Camera, Lock, Award } from "lucide-react";
 
 export const SecurityTrustSection = () => {
   const trustItems = [
@@ -8,9 +8,9 @@ export const SecurityTrustSection = () => {
       description: "CNI, casier judiciaire et attestation d'assurance vérifiés pour chaque promeneur"
     },
     {
-      icon: Shield,
-      title: "Assurance incluse",
-      description: "Responsabilité civile professionnelle couvrant toutes les prestations"
+      icon: Award,
+      title: "Formation Promeneurs certifiés",
+      description: "Formation aux premiers secours canins, expérience vérifiée et références contrôlées"
     },
     {
       icon: Camera,
@@ -19,8 +19,8 @@ export const SecurityTrustSection = () => {
     },
     {
       icon: Lock,
-      title: "Paiement escrow",
-      description: "Votre argent est sécurisé et débloqué uniquement après validation"
+      title: "Paiement bloqué jusqu'à confirmation de service",
+      description: "Votre argent est sécurisé et débloqué uniquement après validation de la mission"
     },
     {
       icon: Star,

@@ -14,16 +14,6 @@ import { AnimatedCard, AnimatedGrid, AnimatedGridItem } from "@/components/ui/an
 import { SectionHeader } from "@/components/ui/section-header";
 import tarifsHero from "@/assets/pages/tarifs-hero.jpg";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } }
-};
-
 const Tarifs = () => {
   const navigate = useNavigate();
   const services = [
@@ -81,9 +71,9 @@ const Tarifs = () => {
 
   const guarantees = [
     { icon: Shield, title: "Promeneurs 100% vérifiés", description: "CNI, casier judiciaire et assurance RC vérifiés manuellement", variant: "primary" as const },
-    { icon: Lock, title: "Paiement escrow sécurisé", description: "Argent bloqué jusqu'à validation de la preuve", variant: "accent" as const },
+    { icon: Lock, title: "Paiement sécurisé", description: "Argent bloqué jusqu'à validation de la preuve", variant: "accent" as const },
     { icon: Camera, title: "Preuves obligatoires", description: "Photo/vidéo + message pendant chaque mission", variant: "success" as const },
-    { icon: CreditCard, title: "Commission transparente 13%", description: "Tout inclus : assurance, support, plateforme", variant: "warning" as const }
+    { icon: CreditCard, title: "Tarifs transparents", description: "Tout inclus : assurance, support, plateforme", variant: "warning" as const }
   ];
 
   const faqItems = [
@@ -92,8 +82,8 @@ const Tarifs = () => {
       answer: "Nous fixons des tarifs minimums garantis pour chaque type de service (à partir de 8€). Chaque promeneur est ensuite libre de fixer ses propres tarifs au-dessus de ces minimums, en fonction de son expérience, de sa zone géographique et de ses services spécifiques. Cette flexibilité permet de trouver le meilleur rapport qualité-prix adapté à vos besoins."
     },
     {
-      question: "Que comprend la commission de 13% ?",
-      answer: "La commission DogWalking de 13% inclut l'assurance responsabilité civile jusqu'à 2M€ pour chaque prestation, le support client disponible 7j/7, la plateforme sécurisée avec messagerie intégrée, le système de paiement escrow qui protège votre argent, et la gestion automatisée des preuves photo/vidéo. C'est un service complet sans frais cachés."
+      question: "Que comprennent les tarifs affichés ?",
+      answer: "Les tarifs DogWalking incluent l'assurance responsabilité civile jusqu'à 2M€ pour chaque prestation, le support client disponible 7j/7, la plateforme sécurisée avec messagerie intégrée, le système de paiement sécurisé qui protège votre argent, et la gestion automatisée des preuves photo/vidéo. C'est un service complet sans frais cachés."
     },
     {
       question: "Puis-je donner un pourboire au promeneur ?",
@@ -101,15 +91,11 @@ const Tarifs = () => {
     },
     {
       question: "Quand suis-je débité pour une réservation ?",
-      answer: "Le paiement est effectué au moment de la réservation mais reste bloqué en escrow (compte séquestre sécurisé). Il n'est libéré au promeneur qu'après réception et validation de la preuve de prestation (photo/vidéo obligatoire). Si aucune preuve n'est envoyée, vous êtes automatiquement remboursé."
+      answer: "Le paiement est effectué au moment de la réservation mais reste bloqué (compte séquestre sécurisé). Il n'est libéré au promeneur qu'après réception et validation de la preuve de prestation (photo/vidéo obligatoire). Si aucune preuve n'est envoyée, vous êtes automatiquement remboursé."
     },
     {
       question: "Puis-je annuler une réservation et être remboursé ?",
       answer: "Oui, vous pouvez annuler gratuitement jusqu'à 24h avant la prestation prévue avec remboursement intégral. Passé ce délai, des frais d'annulation peuvent s'appliquer selon les conditions du promeneur. En cas d'urgence médicale justifiée, contactez notre support pour un traitement au cas par cas."
-    },
-    {
-      question: "L'abonnement PRO est-il obligatoire pour les promeneurs ?",
-      answer: "Non, l'abonnement PRO (6-12€/mois) est totalement optionnel. Il offre des avantages supplémentaires comme une mise en avant prioritaire dans les résultats de recherche, des badges premium visibles sur le profil, des statistiques avancées de performance et un accès prioritaire au support. Les promeneurs peuvent exercer sans abonnement."
     }
   ];
 
@@ -117,7 +103,7 @@ const Tarifs = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Tarifs DogWalking | Prix Promenade Chien, Garde, Visite à Domicile"
-        description="Découvrez nos tarifs transparents : promenade dès 8€, garde dès 10€, visite à domicile dès 8€. Commission 13% tout inclus avec assurance 2M€ et paiement sécurisé."
+        description="Découvrez nos tarifs transparents : promenade dès 8€, garde dès 10€, visite à domicile dès 8€. Tout inclus avec assurance 2M€ et paiement sécurisé."
         canonical="https://dogwalking.fr/tarifs"
       />
       <Header />
@@ -161,7 +147,7 @@ const Tarifs = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Tarifs minimums garantis. Commission DogWalking : 13% tout inclus (assurance + support).
+              Tarifs minimums garantis. Tout inclus (assurance + support).
             </motion.p>
           </div>
         </motion.div>
@@ -256,7 +242,7 @@ const Tarifs = () => {
             subtitle="Un système sécurisé qui protège à la fois les propriétaires et les promeneurs"
             icon={Lock}
             iconVariant="accent"
-            badge="Paiement escrow"
+            badge="Paiement sécurisé"
           />
 
           <AnimatedCard className="overflow-hidden" glow>
@@ -264,14 +250,14 @@ const Tarifs = () => {
               <div className="p-8 bg-gradient-to-br from-primary to-accent text-primary-foreground">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
                   <Lock className="h-6 w-6" />
-                  Système Escrow
+                  Paiement bloqué
                 </h3>
                 <div className="space-y-4">
                   {[
                     { step: "1", title: "Réservation", desc: "Votre paiement est bloqué en sécurité. Le promeneur ne reçoit rien immédiatement." },
                     { step: "2", title: "Mission + Preuve", desc: "Le promeneur effectue la mission et envoie obligatoirement une preuve photo/vidéo." },
                     { step: "3", title: "Validation", desc: "Vous recevez la preuve. Le paiement est débloqué après validation." },
-                    { step: "4", title: "Paiement", desc: "Le promeneur reçoit 87%. DogWalking prélève 13% (tout inclus)." }
+                    { step: "4", title: "Paiement", desc: "Le promeneur reçoit son paiement intégralement." }
                   ].map((item, index) => (
                     <motion.div 
                       key={index} 
@@ -321,47 +307,23 @@ const Tarifs = () => {
               </div>
             </div>
           </AnimatedCard>
+        </div>
 
-          {/* Abonnement PRO */}
-          <AnimatedCard className="p-6" glow>
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <div className="flex items-start gap-4">
-                <AnimatedIcon icon={Award} size="lg" variant="accent" />
-                <div>
-                  <h3 className="text-xl font-bold flex items-center gap-2">
-                    Abonnement PRO Promeneur
-                    <Badge variant="outline" className="text-xs">Optionnel</Badge>
-                  </h3>
-                  <p className="text-2xl font-bold text-primary mt-1">6-12€/mois</p>
-                  <p className="text-muted-foreground">Mise en avant, badges premium, stats avancées, support prioritaire</p>
-                </div>
-              </div>
-              <Button variant="outline" size="lg" onClick={() => navigate('/walker/register')}>
-                Devenir promeneur PRO
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
-          </AnimatedCard>
-
-          <p className="text-center text-sm text-muted-foreground">
-            * Tarifs minimums garantis. Chaque promeneur fixe librement ses propres tarifs. Pourboires possibles et 100% reversés.
-          </p>
-
-          {/* FAQ Section */}
-          <div className="pt-12">
-            <SectionHeader
-              title="Questions fréquentes sur les tarifs"
-              subtitle="Tout ce que vous devez savoir sur notre politique tarifaire"
-              icon={Users}
-              iconVariant="primary"
-            />
-            <SEOFAQ faqs={faqItems} title="" />
+        {/* FAQ Section */}
+        <div className="max-w-4xl mx-auto mt-20">
+          <SectionHeader
+            title="Questions fréquentes"
+            subtitle="Tout ce que vous devez savoir sur nos tarifs et notre fonctionnement"
+            icon={Users}
+          />
+          <div className="mt-8">
+            <SEOFAQ items={faqItems} />
           </div>
         </div>
       </main>
-      
-      <Footer />
+
       <FloatingContact />
+      <Footer />
     </div>
   );
 };

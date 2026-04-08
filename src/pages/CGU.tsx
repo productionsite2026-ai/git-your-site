@@ -111,11 +111,10 @@ const CGU = () => {
             <h3 className="text-xl font-medium mb-2">5.1 Tarification</h3>
             <p className="text-muted-foreground">
               Les tarifs sont librement fixés par les Promeneurs dans le respect des tarifs 
-              minimums indiqués sur la Plateforme. DogWalking prélève une commission de 13% 
-              sur chaque Prestation réalisée.
+              minimums indiqués sur la Plateforme. L'assurance et le support sont inclus dans chaque Prestation réalisée.
             </p>
             
-            <h3 className="text-xl font-medium mb-2 mt-4">5.2 Paiement sécurisé (Escrow)</h3>
+            <h3 className="text-xl font-medium mb-2 mt-4">5.2 Paiement sécurisé</h3>
             <p className="text-muted-foreground">
               Le paiement est bloqué lors de la réservation et n'est débloqué au Promeneur 
               qu'après validation de la Prestation par le Propriétaire ou automatiquement 

@@ -20,7 +20,7 @@ export const HowItWorksSection = () => {
       number: "2",
       icon: Calendar,
       title: "Réservez",
-      description: "Sélectionnez le service, la date et l'heure. Votre paiement est sécurisé en escrow jusqu'à validation.",
+      description: "Sélectionnez le service, la date et l'heure. Votre paiement est bloqué en toute sécurité jusqu'à validation.",
       highlight: "Paiement bloqué",
       image: bookingReservation
     },

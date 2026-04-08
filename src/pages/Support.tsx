@@ -31,9 +31,9 @@ const faqCategories = {
     title: "Propriétaires",
     icon: Dog,
     faqs: [
-      { question: "Comment fonctionne DogWalking pour trouver un promeneur ?", answer: "Entrez votre adresse, choisissez le type de service, et découvrez les promeneurs vérifiés disponibles. Consultez leurs profils, avis, tarifs, puis réservez en ligne. Le paiement est sécurisé en escrow jusqu'à réception des preuves photo." },
+      { question: "Comment fonctionne DogWalking pour trouver un promeneur ?", answer: "Entrez votre adresse, choisissez le type de service, et découvrez les promeneurs vérifiés disponibles. Consultez leurs profils, avis, tarifs, puis réservez en ligne. Le paiement est sécurisé jusqu'à réception des preuves photo." },
       { question: "Les promeneurs sont-ils vraiment vérifiés ?", answer: "Absolument. Chaque promeneur fournit CNI, casier judiciaire vierge et attestation d'assurance RC. Seuls 35% des candidats sont acceptés." },
-      { question: "Que se passe-t-il si je ne suis pas satisfait ?", answer: "Grâce au paiement escrow, votre argent reste bloqué jusqu'à validation. Vous pouvez contester et être remboursé. Notre support intervient sous 24h." },
+      { question: "Que se passe-t-il si je ne suis pas satisfait ?", answer: "Grâce au paiement sécurisé, votre argent reste bloqué jusqu'à validation. Vous pouvez contester et être remboursé. Notre support intervient sous 24h." },
       { question: "Puis-je annuler une réservation ?", answer: "Annulation gratuite jusqu'à 24h avant avec remboursement intégral. Des frais peuvent s'appliquer après ce délai." },
       { question: "Comment ajouter mon chien ?", answer: "Depuis votre tableau de bord, cliquez 'Ajouter un chien'. Remplissez nom, race, âge, poids, tempérament et ajoutez une photo." },
       { question: "Puis-je garder le même promeneur ?", answer: "Oui, ajoutez-le en favori et réservez-le directement. Les promeneurs réguliers connaissent mieux votre chien." },
@@ -46,17 +46,16 @@ const faqCategories = {
       { question: "Comment devenir promeneur ?", answer: "Inscrivez-vous, complétez votre profil, soumettez vos documents (CNI, casier, assurance RC). Vérification sous 48h." },
       { question: "Quels documents sont nécessaires ?", answer: "CNI ou passeport, casier judiciaire (bulletin n°3), attestation d'assurance RC et photo professionnelle." },
       { question: "Comment fixer mes tarifs ?", answer: "Vous êtes libre au-dessus des minimums (8€ promenade, 10€ garde). Adaptez selon votre expérience et zone." },
-      { question: "Comment suis-je payé ?", answer: "Le paiement est libéré après envoi des preuves et validation. Vous recevez 87%, les 13% couvrent assurance et plateforme." },
-      { question: "Combien puis-je gagner ?", answer: "En moyenne 500-1500€/mois. Les promeneurs à temps plein dans les grandes villes dépassent 2000€/mois." },
+      { question: "Comment suis-je payé ?", answer: "Le paiement est libéré après envoi des preuves et validation.Vous recevez l'intégralité du montant de la prestation. L'assurance et le support sont inclus.   { question: "Combien puis-je gagner ?", answer: "En moyenne 500-1500€/mois. Les promeneurs à temps plein dans les grandes villes dépassent 2000€/mois." },
     ],
   },
   paiement: {
     title: "Paiement",
     icon: CreditCard,
     faqs: [
-      { question: "Comment fonctionne le paiement escrow ?", answer: "Le paiement est bloqué à la réservation en compte séquestre. Il est libéré au promeneur après validation des preuves photo/vidéo." },
-      { question: "Que comprend la commission de 13% ?", answer: "Assurance RC jusqu'à 2M€, support 7j/7, messagerie sécurisée et système escrow." },
-      { question: "Puis-je donner un pourboire ?", answer: "Oui, 100% reversé au promeneur sans commission." },
+      { question: "Comment fonctionne le paiement sécurisé ?", answer: "Le paiement est bloqué à la réservation. Il est libéré au promeneur après validation des preuves photo/vidéo." },
+      { question: "Que comprennent les frais de service ?", answer: "Assurance RC jusqu'à 2M€, support 7j/7, messagerie sécurisée et système de paiement sécurisé." },
+      { question: "Puis-je donner un pourboire ?", answer: "Oui, 100% reversé au promeneur." },
       { question: "Et si la prestation n'est pas effectuée ?", answer: "Remboursement automatique si aucune preuve n'est envoyée." },
     ],
   },
@@ -134,7 +133,7 @@ const Support = () => {
   ];
 
   const values = [
-    { icon: Shield, title: "Sécurité Absolue", description: "Vérifications rigoureuses, paiement escrow, assurance premium." },
+    { icon: Shield, title: "Sécurité Absolue", description: "Vérifications rigoureuses, paiement sécurisé, assurance premium." },
     { icon: Heart, title: "Passion Animale", description: "Des promeneurs passionnés et bienveillants." },
     { icon: Eye, title: "Transparence Totale", description: "Preuves photo, tarifs affichés, avis authentiques." },
     { icon: Zap, title: "Innovation Continue", description: "Technologie au service du bien-être animal." },

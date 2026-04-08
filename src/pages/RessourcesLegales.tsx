@@ -174,9 +174,7 @@ const RessourcesLegales = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">Article 4 - Tarifs et Paiement</h2>
                 <p className="text-muted-foreground mb-4">
-                  Les tarifs sont librement fixés par les promeneurs. DogWalking prélève une commission de 13% 
-                  sur chaque prestation. Le paiement est bloqué lors de la réservation (escrow) et libéré après 
-                  validation de la prestation.
+                  Les tarifs sont librement fixés par les promeneurs. Le paiement est bloqué lors de la réservation et libéré après validation de la prestation. L'assurance et le support sont inclus dans le service.
                 </p>
                 <h3 className="text-xl font-medium mb-2">Annulation</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">

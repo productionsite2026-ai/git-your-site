@@ -24,7 +24,7 @@ const faqCategories = {
     faqs: [
       {
         question: "Comment fonctionne DogWalking pour trouver un promeneur ?",
-        answer: "C'est simple : entrez votre adresse, choisissez le type de service souhaité (promenade, garde, visite), et découvrez les promeneurs vérifiés disponibles près de chez vous. Consultez leurs profils, avis, tarifs, puis réservez en ligne. Le paiement est sécurisé en escrow jusqu'à réception des preuves photo de la prestation."
+        answer: "C'est simple : entrez votre adresse, choisissez le type de service souhaité (promenade, garde, visite), et découvrez les promeneurs vérifiés disponibles près de chez vous. Consultez leurs profils, avis, tarifs, puis réservez en ligne. Le paiement est sécurisé jusqu'à réception des preuves photo de la prestation."
       },
       {
         question: "Les promeneurs sont-ils vraiment vérifiés ?",
@@ -32,7 +32,7 @@ const faqCategories = {
       },
       {
         question: "Que se passe-t-il si je ne suis pas satisfait de la prestation ?",
-        answer: "Grâce à notre système de paiement escrow, votre argent reste bloqué jusqu'à validation de la prestation. Si le promeneur n'envoie pas de preuve photo/vidéo, ou si la prestation ne correspond pas à vos attentes, vous pouvez contester et être remboursé. Notre équipe support intervient sous 24h."
+        answer: "Grâce à notre système de paiement sécurisé, votre argent reste bloqué jusqu'à validation de la prestation. Si le promeneur n'envoie pas de preuve photo/vidéo, ou si la prestation ne correspond pas à vos attentes, vous pouvez contester et être remboursé. Notre équipe support intervient sous 24h."
       },
       {
         question: "Puis-je annuler une réservation et être remboursé ?",
@@ -67,7 +67,7 @@ const faqCategories = {
       },
       {
         question: "Comment suis-je payé ?",
-        answer: "Le paiement est libéré automatiquement après envoi de la preuve de prestation (photo/vidéo obligatoire) et validation par le propriétaire. Vous recevez 87% du montant, les 13% restants couvrent l'assurance, le support et la plateforme."
+        answer: "Le paiement est libéré automatiquement après envoi de la preuve de prestation (photo/vidéo obligatoire) et validation par le propriétaire. Vous recevez l'intégralité du montant de la prestation. L'assurance et le support sont inclus."
       },
       {
         question: "L'abonnement PRO est-il obligatoire ?",
@@ -82,31 +82,31 @@ const faqCategories = {
   paiement: {
     title: "Paiement & Tarifs",
     icon: CreditCard,
-    description: "Comprendre le système de paiement escrow",
+    description: "Comprendre le système de paiement sécurisé",
     faqs: [
       {
         question: "Comment sont calculés les tarifs sur DogWalking ?",
         answer: "Nous fixons des tarifs minimums garantis pour chaque type de service (à partir de 8€). Chaque promeneur est ensuite libre de fixer ses propres tarifs au-dessus de ces minimums."
       },
       {
-        question: "Que comprend la commission de 13% ?",
-        answer: "La commission DogWalking de 13% inclut l'assurance responsabilité civile jusqu'à 2M€ pour chaque prestation, le support client disponible 7j/7, la plateforme sécurisée avec messagerie intégrée, et le système de paiement escrow."
+        question: "Que comprennent les frais de service ?",
+        answer: "Les frais de service incluent l'assurance responsabilité civile jusqu'à 2M€ pour chaque prestation, le support client disponible 7j/7, la plateforme sécurisée avec messagerie intégrée, et le système de paiement sécurisé."
       },
       {
-        question: "Comment fonctionne le paiement escrow ?",
+        question: "Comment fonctionne le paiement sécurisé ?",
         answer: "Le paiement est effectué au moment de la réservation mais reste bloqué en compte séquestre sécurisé. Il n'est libéré au promeneur qu'après réception et validation de la preuve de prestation (photo/vidéo obligatoire)."
       },
       {
         question: "Puis-je donner un pourboire au promeneur ?",
-        answer: "Oui, vous pouvez donner un pourboire après chaque prestation réussie. Les pourboires sont 100% reversés au promeneur sans aucune commission prélevée par DogWalking."
+        answer: "Oui, vous pouvez donner un pourboire après chaque prestation réussie. Les pourboires sont 100% reversés au promeneur."
       },
       {
         question: "Que se passe-t-il si la prestation n'est pas effectuée ?",
-        answer: "Si aucune preuve n'est envoyée ou si la prestation n'a pas eu lieu, vous êtes automatiquement remboursé. Notre système escrow protège votre argent jusqu'à validation."
+        answer: "Si aucune preuve n'est envoyée ou si la prestation n'a pas eu lieu, vous êtes automatiquement remboursé. Notre système de paiement sécurisé protège votre argent jusqu'à validation."
       },
       {
         question: "Quand suis-je débité pour une réservation ?",
-        answer: "Le débit intervient au moment de la confirmation de réservation. L'argent reste bloqué en escrow jusqu'à validation de la prestation par le propriétaire."
+        answer: "Le débit intervient au moment de la confirmation de réservation. L'argent reste bloqué jusqu'à validation de la prestation par le propriétaire."
       }
     ]
   },

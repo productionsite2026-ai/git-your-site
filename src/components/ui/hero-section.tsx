@@ -107,7 +107,7 @@ export const HeroSection = () => {
             className="text-lg md:text-2xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto"
           >
             Trouvez un promeneur de chien vérifié près de chez vous. 
-            Paiement escrow sécurisé, preuves photo obligatoires, assurance incluse.
+            Paiement sécurisé, preuves photo obligatoires, assurance incluse.
           </motion.p>
 
           <motion.div 
